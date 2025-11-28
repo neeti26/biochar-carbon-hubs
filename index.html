@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 Biochar Carbon Hubs – Digital Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <img src="assets/logo.svg" alt="Biochar Logo" class="logo">
+                <div>
+                    <h1>🌱 Biochar Carbon Hubs – Digital Prototype</h1>
+                    <p class="subtitle">Team CarbonCycle Innovators • EarthON Greenovation Challenge (IIT Bombay)</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column: Controls -->
+            <aside class="controls-panel">
+                <h2>Scenario Parameters</h2>
+                
+                <div class="control-group">
+                    <label for="wastePerHub">
+                        Waste per Hub (tons/year)
+                        <span class="value-display" id="wastePerHubValue">500</span>
+                    </label>
+                    <input type="range" id="wastePerHub" min="100" max="2000" step="50" value="500" aria-label="Waste per hub in tons per year">
+                    <input type="number" id="wastePerHubNum" min="100" max="2000" step="50" value="500" class="numeric-input">
+                </div>
+
+                <div class="control-group">
+                    <label for="numHubs">
+                        Number of Hubs
+                        <span class="value-display" id="numHubsValue">100</span>
+                    </label>
+                    <input type="range" id="numHubs" min="1" max="10000" step="1" value="100" aria-label="Number of hubs">
+                    <input type="number" id="numHubsNum" min="1" max="10000" step="1" value="100" class="numeric-input">
+                </div>
+
+                <div class="control-group">
+                    <label for="yieldFactor">
+                        Yield Factor (biochar/waste)
+                        <span class="value-display" id="yieldFactorValue">0.60</span>
+                    </label>
+                    <input type="range" id="yieldFactor" min="0.3" max="0.9" step="0.01" value="0.6" aria-label="Yield factor">
+                    <input type="number" id="yieldFactorNum" min="0.3" max="0.9" step="0.01" value="0.6" class="numeric-input">
+                </div>
+
+                <div class="control-group">
+                    <label for="co2PerTon">
+                        CO₂ per ton biochar (tCO₂e/t)
+                        <span class="value-display" id="co2PerTonValue">2.50</span>
+                    </label>
+                    <input type="range" id="co2PerTon" min="1.5" max="4.0" step="0.1" value="2.5" aria-label="CO2 per ton of biochar">
+                    <input type="number" id="co2PerTonNum" min="1.5" max="4.0" step="0.1" value="2.5" class="numeric-input">
+                </div>
+
+                <div class="control-group">
+                    <label for="stabilityFactor">
+                        Stability Factor (conservative)
+                        <span class="value-display" id="stabilityFactorValue">0.80</span>
+                    </label>
+                    <input type="range" id="stabilityFactor" min="0.5" max="1.0" step="0.05" value="0.8" aria-label="Stability factor">
+                    <input type="number" id="stabilityFactorNum" min="0.5" max="1.0" step="0.05" value="0.8" class="numeric-input">
+                </div>
+
+                <div class="control-group">
+                    <label for="jobsPerHub">
+                        Jobs per Hub
+                        <span class="value-display" id="jobsPerHubValue">20</span>
+                    </label>
+                    <input type="range" id="jobsPerHub" min="5" max="50" step="1" value="20" aria-label="Jobs per hub">
+                    <input type="number" id="jobsPerHubNum" min="5" max="50" step="1" value="20" class="numeric-input">
+                </div>
+
+                <div class="control-group">
+                    <label for="fertilizerSaving">
+                        Fertilizer Saving (%)
+                        <span class="value-display" id="fertilizerSavingValue">35</span>
+                    </label>
+                    <input type="range" id="fertilizerSaving" min="0" max="60" step="5" value="35" aria-label="Fertilizer saving percentage">
+                    <input type="number" id="fertilizerSavingNum" min="0" max="60" step="5" value="35" class="numeric-input">
+                </div>
+
+                <button id="resetBtn" class="btn btn-secondary">Reset Defaults</button>
+                
+                <!-- Soil Analysis Section -->
+                <div class="soil-analysis-section">
+                    <h3>🔬 AI Soil Analysis</h3>
+                    <p class="soil-hint">Upload soil image for AI-powered recommendations</p>
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="soilImageInput" accept="image/*" hidden>
+                        <div class="upload-content">
+                            <span class="upload-icon">📸</span>
+                            <p>Click or drag soil image here</p>
+                            <small>Supports JPG, PNG (max 5MB)</small>
+                        </div>
+                    </div>
+                    <div id="soilPreview" class="soil-preview" style="display:none;">
+                        <img id="previewImage" alt="Soil preview">
+                        <button id="analyzeBtn" class="btn btn-analyze">Analyze Soil</button>
+                    </div>
+                    <div id="analysisResult" class="analysis-result" style="display:none;">
+                        <div class="result-header">
+                            <span class="status-badge" id="statusBadge">Analyzing...</span>
+                        </div>
+                        <div id="soilRecommendations"></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Column: KPIs, Chart, Table -->
+            <main class="results-panel">
+                <!-- Real-Time Stats Banner -->
+                <div class="realtime-banner">
+                    <div class="realtime-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="realtime-text">LIVE UPDATES</span>
+                    </div>
+                    <div class="stats-ticker">
+                        <span id="tickerText">Real-time impact calculation active</span>
+                    </div>
+                    <div class="last-update">
+                        Updated: <span id="lastUpdate">just now</span>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <section class="kpi-grid">
+                    <div class="kpi-card" data-tooltip="Total agricultural waste processed annually">
+                        <div class="kpi-trend" id="wasteTrend">📊</div>
+                        <div class="kpi-value" id="kpiWaste">50,000</div>
+                        <div class="kpi-label">Waste Processed</div>
+                        <div class="kpi-unit">tons/year</div>
+                        <div class="kpi-change" id="wasteChange">--</div>
+                    </div>
+                    <div class="kpi-card" data-tooltip="Biochar produced from pyrolysis">
+                        <div class="kpi-trend" id="biocharTrend">📊</div>
+                        <div class="kpi-value" id="kpiBiochar">30,000</div>
+                        <div class="kpi-label">Biochar Produced</div>
+                        <div class="kpi-unit">tons/year</div>
+                        <div class="kpi-change" id="biocharChange">--</div>
+                    </div>
+                    <div class="kpi-card kpi-highlight" data-tooltip="Conservative carbon sequestration estimate">
+                        <div class="kpi-trend" id="co2Trend">📊</div>
+                        <div class="kpi-value" id="kpiCO2">60,000</div>
+                        <div class="kpi-label">
+                            Stable CO₂ Avoided (conservative)
+                            <span class="tooltip" title="Raw = biochar × tCO₂/t; Stable = Raw × stability factor (default 0.8)">ℹ️</span>
+                        </div>
+                        <div class="kpi-unit">tCO₂e/year</div>
+                        <div class="kpi-change" id="co2Change">--</div>
+                    </div>
+                    <div class="kpi-card" data-tooltip="Direct employment opportunities created">
+                        <div class="kpi-trend" id="jobsTrend">📊</div>
+                        <div class="kpi-value" id="kpiJobs">2,000</div>
+                        <div class="kpi-label">Green Jobs Created</div>
+                        <div class="kpi-unit">jobs</div>
+                        <div class="kpi-change" id="jobsChange">--</div>
+                    </div>
+                </section>
+
+                <!-- Chart -->
+                <section class="chart-section">
+                    <div class="chart-header">
+                        <h3>CO₂ Avoided vs Number of Hubs</h3>
+                        <div class="chart-controls">
+                            <button id="downloadChartBtn" class="btn btn-small">Download Chart PNG</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- New: Financial Analysis Section -->
+                <section class="financial-section">
+                    <div class="section-header">
+                        <h3>💰 Financial Analysis & ROI</h3>
+                        <button id="toggleFinancial" class="btn-toggle">Show Details</button>
+                    </div>
+                    <div id="financialDetails" class="financial-details" style="display:none;">
+                        <div class="financial-grid">
+                            <div class="financial-card">
+                                <div class="financial-label">Total Revenue</div>
+                                <div class="financial-value" id="totalRevenue">₹0</div>
+                                <div class="financial-breakdown" id="revenueBreakdown"></div>
+                            </div>
+                            <div class="financial-card">
+                                <div class="financial-label">Operating Costs</div>
+                                <div class="financial-value" id="totalCosts">₹0</div>
+                                <div class="financial-breakdown" id="costsBreakdown"></div>
+                            </div>
+                            <div class="financial-card financial-highlight">
+                                <div class="financial-label">Annual Profit</div>
+                                <div class="financial-value" id="annualProfit">₹0</div>
+                                <div class="financial-breakdown">
+                                    <div>ROI: <span id="roiPercent">0%</span></div>
+                                    <div>Payback: <span id="paybackPeriod">0 yrs</span></div>
+                                </div>
+                            </div>
+                            <div class="financial-card">
+                                <div class="financial-label">Carbon Credit Value</div>
+                                <div class="financial-value" id="carbonRevenue">₹0</div>
+                                <div class="financial-breakdown">
+                                    <label>Price/tCO₂: ₹<input type="number" id="carbonPrice" value="2000" min="500" max="5000" step="100" class="price-input"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- New: Scenario Comparison -->
+                <section class="comparison-section">
+                    <div class="section-header">
+                        <h3>🔀 Scenario Comparison</h3>
+                        <div class="scenario-actions">
+                            <button id="saveScenario" class="btn btn-small">💾 Save Current</button>
+                            <button id="clearScenarios" class="btn btn-small btn-secondary">🗑️ Clear All</button>
+                        </div>
+                    </div>
+                    <div id="scenarioCards" class="scenario-cards">
+                        <div class="scenario-placeholder">
+                            <p>📊 No scenarios saved yet. Adjust parameters and click "Save Current" to compare scenarios.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Table -->
+                <section class="table-section">
+                    <div class="table-header">
+                        <h3>Per-Hub Impact (First 10 Hubs - Cumulative)</h3>
+                        <div class="table-actions">
+                            <button id="downloadCsvBtn" class="btn btn-small">Download CSV</button>
+                            <button id="downloadPdfBtn" class="btn btn-small">Download PDF Report</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="hubTable">
+                            <thead>
+                                <tr>
+                                    <th>Hub</th>
+                                    <th>Waste (tons)</th>
+                                    <th>Biochar (tons)</th>
+                                    <th>CO₂ (tons)</th>
+                                    <th>Jobs</th>
+                                </tr>
+                            </thead>
+                            <tbody id="hubTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- About/MRV Section -->
+                <section class="about-section">
+                    <details>
+                        <summary>About & MRV Method</summary>
+                        <div class="about-content">
+                            <h4>Measurement, Reporting & Verification (MRV)</h4>
+                            <ul>
+                                <li><strong>Measure:</strong> Track intake mass (agricultural waste), moisture content (%), and product mass per batch using calibrated scales and moisture meters.</li>
+                                <li><strong>Report:</strong> Weekly batch sheets documenting input waste, biochar yield, and operational parameters. Monthly summaries consolidated into CSV format for transparency.</li>
+                                <li><strong>Verify:</strong> Random lab testing (proximate/ultimate analysis) to measure fixed carbon content. Stability factor applied to adjust sequestered CO₂ conservatively.</li>
+                                <li><strong>Conservative Accounting:</strong> All CO₂ estimates use a stability factor (default 0.8) pending lab calibration, ensuring underestimation rather than overstatement of impact.</li>
+                                <li><strong>Formulas:</strong> Biochar = Waste × Yield Factor; CO₂ (raw) = Biochar × tCO₂/t; CO₂ (stable) = CO₂ (raw) × Stability Factor</li>
+                                <li><strong>Transparency:</strong> All data, formulas, and assumptions are documented and available for third-party audit. CSV exports include per-hub breakdowns.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </section>
+
+                <!-- New: Quick Presets -->
+                <section class="presets-section">
+                    <div class="section-header">
+                        <h3>⚡ Quick Presets</h3>
+                    </div>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="pilot">🧪 Pilot Phase (10 hubs)</button>
+                        <button class="preset-btn" data-preset="district">🏘️ District Scale (100 hubs)</button>
+                        <button class="preset-btn" data-preset="state">🌆 State Scale (1000 hubs)</button>
+                        <button class="preset-btn" data-preset="conservative">📉 Conservative Estimate</button>
+                        <button class="preset-btn" data-preset="optimistic">📈 Optimistic Estimate</button>
+                        <button class="preset-btn" data-preset="degraded">⚠️ Degraded Soil Focus</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Contact: Neeti Malu</p>
+        </footer>
+        
+        <!-- Performance Monitor (Dev Mode) -->
+        <div id="perfMonitor" class="perf-monitor" style="display:none;">
+            <div class="perf-title">⚡ Performance</div>
+            <div class="perf-stat">FPS: <span id="perfFps">60</span></div>
+            <div class="perf-stat">Calc: <span id="perfCalc">0ms</span></div>
+            <div class="perf-stat">Render: <span id="perfRender">0ms</span></div>
+            <div class="perf-stat">Cache: <span id="perfCache">0</span></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

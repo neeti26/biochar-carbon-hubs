@@ -1,0 +1,11 @@
+scenario_name,waste_per_hub,num_hubs,yield_factor,co2_per_ton,stability_factor,jobs_per_hub,fertilizer_saving
+Default,500,100,0.6,2.5,0.8,20,35
+Pilot_Phase,500,10,0.6,2.5,0.8,20,35
+District_Scale,500,100,0.6,2.5,0.8,20,35
+State_Scale,500,1000,0.6,2.5,0.8,20,35
+Conservative,500,100,0.5,2.0,0.7,15,25
+Optimistic,500,100,0.7,3.0,0.9,25,45
+Large_Hubs,1000,50,0.6,2.5,0.8,30,35
+Small_Hubs,250,200,0.6,2.5,0.8,15,35
+High_Yield,500,100,0.75,2.5,0.8,20,40
+Low_Yield,500,100,0.45,2.5,0.8,20,30

@@ -1,0 +1,211 @@
+═══════════════════════════════════════════════════════════════════════
+  BIOCHAR CARBON HUBS - AI-POWERED FEATURES GUIDE
+  Real-Time Updates & Intelligent Soil Analysis
+═══════════════════════════════════════════════════════════════════════
+
+🚀 NEW REAL-TIME FEATURES
+═══════════════════════════════════════════════════════════════════════
+
+1. LIVE UPDATES BANNER
+   ✓ Pulsing green indicator shows system is live
+   ✓ Rotating status messages every 4 seconds
+   ✓ Real-time timestamp ("just now", "5s ago", "2m ago")
+
+2. DYNAMIC CHANGE TRACKING
+   ✓ Each KPI shows percentage change from previous value
+   ✓ Green badges for increases (+15.3%)
+   ✓ Red badges for decreases (-8.2%)
+   ✓ Smooth color transitions
+
+3. ANIMATED METRICS
+   ✓ Numbers count up smoothly (not instant jumps)
+   ✓ Chart animates with easing curves
+   ✓ Table rows fade in/out elegantly
+
+4. ENHANCED TOOLTIPS
+   ✓ Hover over chart points to see:
+     - Hub count
+     - CO₂ avoided
+     - Cars equivalent (e.g., "13,000 cars removed")
+
+
+🔬 AI SOIL ANALYSIS FEATURE
+═══════════════════════════════════════════════════════════════════════
+
+HOW TO USE:
+
+Step 1: UPLOAD SOIL IMAGE
+   • Click the upload area OR drag & drop
+   • Supports: JPG, PNG (max 5MB)
+   • Image appears as preview
+
+Step 2: ANALYZE
+   • Click "Analyze Soil" button
+   • AI processes image (2-second simulation)
+   • Status badge shows "Analyzing..." with pulse
+
+Step 3: VIEW RESULTS
+   System detects 4 possible soil types:
+   
+   📊 Clay-rich soil
+      - High biochar suitability
+      - Recommends 5-10 tons/hectare
+      - +15-25% yield improvement
+      - Adjusts: Yield Factor → 0.65, CO₂ → 2.7
+   
+   🏖️ Sandy soil
+      - Very High suitability
+      - Recommends 8-12 tons/hectare
+      - +25-40% water retention
+      - Adjusts: Yield Factor → 0.70, CO₂ → 2.8
+   
+   🌱 Loamy soil
+      - Medium-High suitability
+      - Recommends 3-6 tons/hectare
+      - +20-30% microbial activity
+      - Adjusts: Yield Factor → 0.60, CO₂ → 2.5
+   
+   ⚠️ Degraded/eroded soil
+      - Critical suitability
+      - Recommends 10-15 tons/hectare URGENT
+      - Maximum carbon storage potential
+      - Adjusts: Yield Factor → 0.75, CO₂ → 3.0, Stability → 0.85
+
+Step 4: APPLY RECOMMENDATIONS
+   • Click "Apply AI Recommendations to Calculator"
+   • System automatically adjusts:
+     - Yield Factor slider
+     - CO₂ per ton slider
+     - Stability Factor (if needed)
+   • KPIs recalculate instantly
+   • Page scrolls to top to show new metrics
+
+
+EXAMPLE WORKFLOW:
+═══════════════════════════════════════════════════════════════════════
+
+Scenario: Farmer wants to know biochar impact for their sandy field
+
+1. Set initial parameters:
+   - Waste per Hub: 500 tons
+   - Number of Hubs: 50
+   - Default yield: 0.6
+
+2. Upload photo of sandy soil from field
+
+3. AI detects "Sandy soil" and recommends:
+   - Apply 8-12 tons/hectare
+   - Yield Factor should be 0.70 (not 0.60)
+   - CO₂ factor should be 2.8 (better sequestration)
+
+4. Click "Apply AI Recommendations"
+
+5. Dashboard updates:
+   - Yield Factor changes: 0.60 → 0.70
+   - CO₂ per ton changes: 2.5 → 2.8
+   - Biochar produced increases: 15,000 → 17,500 tons
+   - CO₂ avoided increases: 30,000 → 39,200 tCO₂e
+   - Change badges show: +16.7% 🟢
+
+6. Farmer sees 30% MORE impact potential with AI optimization!
+
+
+TECHNICAL DETAILS:
+═══════════════════════════════════════════════════════════════════════
+
+AI Simulation:
+• Currently uses intelligent random selection (4 soil types)
+• Production version would integrate:
+  - TensorFlow.js for browser-based image recognition
+  - Pre-trained soil classification CNN model
+  - Or API call to cloud ML service (Azure Custom Vision, AWS Rekognition)
+
+Real-Time Engine:
+• Updates timestamp every 1 second
+• Rotates ticker messages every 4 seconds
+• Tracks metric changes with 0.01% precision
+• Animates all transitions at 60fps
+
+Performance:
+• Image upload: Instant preview
+• AI analysis: 2-second simulation (would be 1-3s for real ML)
+• Recommendation apply: Instant
+• Zero lag on user interactions
+
+
+KEYBOARD SHORTCUTS (Power Users):
+═══════════════════════════════════════════════════════════════════════
+
+• Tab - Navigate between controls
+• Enter - Activate buttons
+• Arrow keys - Adjust sliders
+• Ctrl + R - Reset to defaults (browser refresh)
+
+
+TROUBLESHOOTING:
+═══════════════════════════════════════════════════════════════════════
+
+Q: Upload area not clickable?
+A: Ensure JavaScript is enabled. Try drag & drop instead.
+
+Q: Image too large error?
+A: Resize image to under 5MB using any photo editor.
+
+Q: Analysis stuck on "Analyzing..."?
+A: Refresh page and try again. Check browser console (F12).
+
+Q: Recommendations not applying?
+A: Make sure sliders are visible and not at min/max limits.
+
+
+ADVANCED TIPS:
+═══════════════════════════════════════════════════════════════════════
+
+✓ Upload multiple soil samples to see variation
+✓ Compare degraded vs healthy soil impact
+✓ Test different hub counts after AI recommendations
+✓ Export CSV after AI optimization for reporting
+✓ Use chart download to show AI-enhanced scenarios
+
+
+FUTURE ENHANCEMENTS (Roadmap):
+═══════════════════════════════════════════════════════════════════════
+
+Phase 1 (Next 3 months):
+• Integrate real TensorFlow.js model
+• Train on 10,000+ soil images
+• Add pH detection from image
+• Moisture level estimation
+
+Phase 2 (6 months):
+• Multi-image upload (compare sites)
+• Geolocation tagging
+• Historical comparison ("Your soil in 2024 vs 2025")
+• Seasonal recommendations
+
+Phase 3 (12 months):
+• Mobile app with camera integration
+• Real-time field scanning
+• IoT sensor fusion (combine image + sensors)
+• Blockchain-verified soil reports
+
+
+CONTACT & FEEDBACK:
+═══════════════════════════════════════════════════════════════════════
+
+Love the AI feature? Have suggestions?
+Email: neetimalu@gmail.com
+
+Found a bug?
+Open issue with:
+1. Screenshot
+2. Browser + version
+3. Steps to reproduce
+
+
+═══════════════════════════════════════════════════════════════════════
+  AI-POWERED BIOCHAR OPTIMIZATION - MAKING IMPACT MEASURABLE
+═══════════════════════════════════════════════════════════════════════
+
+Version: 2.0 (AI-Enhanced)
+Last Updated: November 2025

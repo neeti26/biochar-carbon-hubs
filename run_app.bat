@@ -1,0 +1,3 @@
+@echo off
+echo Opening Biochar Carbon Hubs Prototype...
+start index.html
